@@ -1,6 +1,6 @@
 import re
 import datetime
-
+from geoip import geolite2
 
 regex = r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})\s+[\d\w.]+\s+[A-Z]+\s+[^\s]+\s+\S+\s+\d+\s+\S+\s([\d\w.]+)"
 extractor = re.compile(regex)
@@ -28,4 +28,12 @@ if __name__ == "__main__":
     """
     test
     """
-    print(parse_file("WebLogs/TestLog.log")[0])
+
+    parseTest = parse_file("WebLogs/TestLog.log")[0]
+    print(parseTest)
+    addressTest = parseTest[1]
+    print(addressTest)
+    ip = "10.10.10.10".encode()
+    match = geolite2.lookup(ip)
+    print(match.country)
+
