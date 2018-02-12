@@ -1,6 +1,8 @@
 import re
 import datetime
+import win_inet_pton
 from geoip import geolite2
+
 
 regex = r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})\s+[\d\w.]+\s+[A-Z]+\s+[^\s]+\s+\S+\s+\d+\s+\S+\s([\d\w.]+)"
 extractor = re.compile(regex)
@@ -24,16 +26,27 @@ def parse_file(log_path):
     lines = [l for l in lines if l[0]!="#"]
     return [parse_line(l) for l in lines]
 
+def lookup_address(ip):
+    """
+    takes in ip address and returns geoip lookup location data as a string.
+    """
+    match = geolite2.lookup(ip)
+    if (match is None):
+        return "Private IP"
+    else:
+        return match.location
+
 if __name__ == "__main__":
     """
     test
     """
 
-    parseTest = parse_file("WebLogs/TestLog.log")[0]
-    print(parseTest)
-    addressTest = parseTest[1]
-    print(addressTest)
-    ip = "10.10.10.10".encode()
-    match = geolite2.lookup(ip)
-    print(match.country)
+    parseTest = parse_file("WebLogs/TestLog.log")
+    #print(parseTest)
+    unique_visitors = set(x[1] for x in parseTest)
+    for v in unique_visitors:
+        ip = v
+        print("IP Address: " + ip +"   Ip Location: "+ str(lookup_address(ip)))
+
+
 
