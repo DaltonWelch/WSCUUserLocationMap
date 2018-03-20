@@ -46,7 +46,7 @@ if __name__ == "__main__":
     unique_visitors = set(x[1] for x in parseTest)
     for v in unique_visitors:
         ip = v
-        print("IP Address: " + ip +"   Ip Location: "+ str(lookup_address(ip)))
+        final_list = (ip, lookup_address(ip))
 
-
+    print(final_list)
 
