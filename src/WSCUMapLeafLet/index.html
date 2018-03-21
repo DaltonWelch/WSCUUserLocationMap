@@ -11,7 +11,7 @@
     </head>
     <body>
         <div id="mapid"></div>
-        <script>
+        <script>            
             var mymap = L.map('mapid').setView([39.78, -97.55], 4);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -20,9 +20,16 @@
                 accessToken: 'pk.eyJ1IjoiZGFsdG9udyIsImEiOiJjamVkaXZpNmoxbDlkMndsbmQwZDJ6amV6In0.xxRnQKRddMOFi_upD5OSwA'
             }).addTo(mymap);
             var marker = L.marker([39.5, -97.00]).addTo(mymap);
+            
         </script>
         <p>Hello World
         </p>
+        <div id="txtid"></div>
+        <script>
+            var div = document.getElementById("txtid");  
+            div.textContent = "my text";  
+            var text = div.textContent;  
+        </script>
     
     </body>
     

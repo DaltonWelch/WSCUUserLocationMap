@@ -3,7 +3,7 @@ import Parse
 
 def write_parsed_log(weblog,outputName):
     parseTest = Parse.parse_file(weblog)
-    f1 = open("ParsedLogs/"+str(outputName), 'w')
+    f1 = open("WSCUMapLeaflet/ParsedLogs/"+str(outputName), 'w')
 
     unique_visitors = set(x[1] for x in parseTest)
     for v in unique_visitors:
