@@ -9,7 +9,7 @@ def write_parsed_log(weblog,outputName):
     for v in unique_visitors:
         ip = v
         loc = Parse.lookup_address(ip)
-        f1.write(str(ip)+","+str(loc[0])+","+str(loc[1])+"\n")
+        f1.write(str(loc[0])+","+str(loc[1])+",")
     print("File parse successful")
     f1.close()
 
@@ -21,6 +21,7 @@ def read_file(fn):
     message = f2.read()
     print(message)
     f2.close()
+
 
 if __name__ == "__main__":
     """

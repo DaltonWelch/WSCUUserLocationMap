@@ -7,30 +7,50 @@
         <title>GETTING STARTED WITH BRACKETS</title>
         <meta name="description" content="An interactive getting started guide for Brackets.">
         <link rel="stylesheet" href="/leaflet/leaflet.css"/>
-        <script src="/leaflet/leaflet.js"></script>
+        <script type="text/javascript" src="/leaflet/leaflet.js"></script>
     </head>
     <body>
+        <input type="file" id="openFile"/>
+        <button type="button" id="displayFile">display file</button>
+        <br>
+        <textarea id="fileContents"></textarea>
         <div id="mapid"></div>
-        <script>            
+        <script type="text/javascript">
             var mymap = L.map('mapid').setView([39.78, -97.55], 4);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18,
-                id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1IjoiZGFsdG9udyIsImEiOiJjamVkaXZpNmoxbDlkMndsbmQwZDJ6amV6In0.xxRnQKRddMOFi_upD5OSwA'
+                id: 'mapbox.pencil',
+                accessToken:'pk.eyJ1IjoiZGFsdG9udyIsImEiOiJjamZzcXMzaTQzZ3J4MndwbzBkaTVydWYyIn0.mKeeFDJ-RpySwruX8kMjPQ'
             }).addTo(mymap);
-            var marker = L.marker([39.5, -97.00]).addTo(mymap);
+//            var marker = L.marker([39.5, -97.00]).addTo(mymap);
+            
+            
+            var refButton = document.getElementById("openFile");
+            var locArray = [];
+
+            refButton.onclick = function() {
+                var fr = new FileReader();
+                fr.onload = function(){
+                    var placeHolder = this.result;
+                    locArray = placeHolder.split(',');
+                    document.getElementById("fileContents").textContent = locArray;
+                    for(var i = 0; i < 2000 ; i+=2){
+                        var marker = L.marker([locArray[i],locArray[i+1]]).addTo(mymap);
+                    }
+                    
+                }
+                fr.readAsText(this.files[0]);
+            }
+            
+//            document.getElementById("display").onclick(function(){
+//                var marker = L.marker([locArray[0], locArray[1]]).addTo(mymap);
+//            });
             
         </script>
-        <p>Hello World
-        </p>
-        <div id="txtid"></div>
-        <script>
-            var div = document.getElementById("txtid");  
-            div.textContent = "my text";  
-            var text = div.textContent;  
-        </script>
-    
+
+
+        
     </body>
     
 </html>

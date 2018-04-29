@@ -32,7 +32,7 @@ def lookup_address(ip):
     """
     match = geolite2.lookup(ip)
     if (match is None):
-        return "Private IP"
+        return 0, 0
     else:
         return match.location
 
